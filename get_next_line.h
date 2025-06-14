@@ -6,7 +6,7 @@
 /*   By: daneto <daneto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:37:44 by daneto            #+#    #+#             */
-/*   Updated: 2025/05/20 10:40:31 by daneto           ###   ########.fr       */
+/*   Updated: 2025/06/14 10:45:47 by daneto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,11 @@
 # ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
 # endif
+
+char *get_next_line(int fd);
+size_t	ft_strlen(const char *str);
+char	*ft_strjoin(char *s1, char const *s2);
+
+
 
 #endif

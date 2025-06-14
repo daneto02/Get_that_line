@@ -6,7 +6,7 @@
 /*   By: daneto <daneto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:37:34 by daneto            #+#    #+#             */
-/*   Updated: 2025/05/20 13:10:24 by daneto           ###   ########.fr       */
+/*   Updated: 2025/06/14 11:50:27 by daneto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,72 @@ char	*ft_strjoin(char *s1, char const *s2)
 	buffer = malloc(sizeof(char) * (len + 1));
 	if (!buffer)
 		return (NULL);
+	while(s1[i] && s1[i])
+		buffer[j++] = s1[i++];
 	i = 0;
-	while(s1[i])
-		
-		
-	
-	
+	while(s2[i])
+		buffer[j++] = s2[i++];
+	buffer[j] = '\0';
+	free(s1);
+	return(buffer);
 }
+
+char	*read_and_join(int fd, char *buffer)
+{
+	char	*line;
+	int		bytes;
+
+	line = NULL;
+	bytes = 1;
+	if (buffer[0])
+		line = ft_strjoin(line, buffer);
+	while (!ft_look_for_nl(buffer, '\n') && bytes > 0)
+	{
+		bytes = read(fd, buffer, BUFFER_SIZE);
+		if (bytes <= 0)
+			break ;
+		buffer[bytes] = '\0';
+		line = ft_strjoin(line, buffer);
+	}
+	if (bytes == -1)
+	{
+		free(line);
+		buffer[0] = '\0';
+		return (NULL);
+	}
+	return (line);
+}
+
+void	clean_buffer(char *buffer)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '\n')
+		i++;
+	while (buffer[i])
+		buffer[j++] = buffer[i++];
+	buffer[j] = '\0';
+}
+
+char	*ft_look_for_nl(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i++;
+	}
+	return (0);
+}
+
+
+
+
