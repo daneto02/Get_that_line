@@ -6,7 +6,7 @@
 /*   By: daneto <daneto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:37:34 by daneto            #+#    #+#             */
-/*   Updated: 2025/06/14 11:50:27 by daneto           ###   ########.fr       */
+/*   Updated: 2025/07/05 15:34:27 by daneto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	if (!*str)
+	if (!str)
 		return (0);
 	while (str[i])
 		i++;
@@ -36,8 +36,8 @@ char	*ft_strjoin(char *s1, char const *s2)
 	len = ft_strlen(s1) + ft_strlen(s2);
 	buffer = malloc(sizeof(char) * (len + 1));
 	if (!buffer)
-		return (NULL);
-	while(s1[i] && s1[i])
+		return (free(s1), NULL);
+	while(s1 && s1[i])
 		buffer[j++] = s1[i++];
 	i = 0;
 	while(s2[i])
@@ -47,7 +47,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 	return(buffer);
 }
 
-char	*read_and_join(int fd, char *buffer)
+char	*ft_read_and_join(int fd, char *buffer)
 {
 	char	*line;
 	int		bytes;
@@ -72,6 +72,8 @@ char	*read_and_join(int fd, char *buffer)
 	}
 	return (line);
 }
+
+
 
 void	clean_buffer(char *buffer)
 {
