@@ -6,7 +6,7 @@
 /*   By: daneto <daneto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 10:37:41 by daneto            #+#    #+#             */
-/*   Updated: 2025/07/05 15:34:36 by daneto           ###   ########.fr       */
+/*   Updated: 2025/07/13 11:47:19 by daneto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,25 @@ char	*get_next_line(int fd)
 	}
 	clean_buffer(buffer);
 	return (line);
+}
+
+#include "get_next_line.h"
+
+int	main(int argc, char **argv)
+{
+	int		fd;
+	char	*line;
+
+	if (argc == 2)
+	{
+		fd = open(argv[1], O_RDONLY);
+		while (line)
+		{
+			line = get_next_line(fd);
+			printf("%s", line);
+			free(line);
+		}
+		close(fd);
+	}
+	return (0);
 }
